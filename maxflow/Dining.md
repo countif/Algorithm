@@ -1,4 +1,4 @@
-ÃèÊö
+# ÃèÊö
 Cows are such finicky eaters. Each cow has a preference for certain foods and drinks, and she will consume no others.
 
 Farmer John has cooked fabulous meals for his cows, but he forgot to check his menu against their preferences. Although he might not be able to stuff everybody, he wants to give a complete meal of both food and drink to as many cows as possible.
@@ -7,18 +7,18 @@ Farmer John has cooked F (1 ¡Ü F ¡Ü 100) types of foods and prepared D (1 ¡Ü D ¡
 
 Each dish or drink can only be consumed by one cow (i.e., once food type 2 is assigned to a cow, no other cow can be assigned food type 2).
 
-ÊäÈë
-Line 1: Three space-separated integers: N, F, and D
-Lines 2..N+1: Each line i starts with a two integers Fi and Di, the number of dishes that cow i likes and the number of drinks that cow i likes. The next Fi integers denote the dishes that cow i will eat, and the Di integers following that denote the drinks that cow i will drink.
-Êä³ö
-Line 1: A single integer that is the maximum number of cows that can be fed both food and drink that conform to their wishes
-ÑùÀıÊäÈë
+#ÊäÈë
+#Line 1: Three space-separated integers: N, F, and D
+#Lines 2..N+1: Each line i starts with a two integers Fi and Di, the number of dishes that cow i likes and the number of drinks that cow i likes. The next Fi integers denote the dishes that cow i will eat, and the Di integers following that denote the drinks that cow i will drink.
+#Êä³ö
+#Line 1: A single integer that is the maximum number of cows that can be fed both food and drink that conform to their wishes
+#ÑùÀıÊäÈë
 4 3 3
 2 2 1 2 3 1
 2 2 2 3 1 2
 2 2 1 3 1 2
 2 1 1 3 3
-ÑùÀıÊä³ö
+#ÑùÀıÊä³ö
 3
 
 

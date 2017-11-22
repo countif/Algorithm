@@ -10,57 +10,57 @@ Test cases are separated from each other by a blank line. Input is terminated by
 # 输出
 For each test case, print one line telling whether arbitrage is possible or not in the format "Case case: Yes" respectively "Case case: No".
 
-#include<iostream>
-#include<stdio.h>
-#include<map>
-#include<string>
-#include<memory.h>
-#define Max 31
-using namespace std;
+	#include<iostream>
+	#include<stdio.h>
+	#include<map>
+	#include<string>
+	#include<memory.h>
+	#define Max 31
+	using namespace std;
 
-int main(){
-	int n ;
-	int t = 1;
-	while(cin >> n){
-		if(n == 0)
-			break;
+	int main(){
+		int n ;
+		int t = 1;
+		while(cin >> n){
+			if(n == 0)
+				break;
 
-		double dp[Max][Max];
-		memset(dp,0,sizeof(dp));
-		map<string,int> M;
-		int index = 0;
-		for (int i = 0;i<n;++i)
-		{
-			string cur;
-			cin >> cur;
-			M[cur] = index++;
-		}	 
-
-		int m;
-		cin >>m;
-		for (int i = 0;i<m;++i)
-		{
-			string x,y;
-			double dis;
-			cin >>x>>dis>>y;
-			dp[M[x]][M[y]] = dis;
-		}
-		for (int k = 0;k<n;++k)
+			double dp[Max][Max];
+			memset(dp,0,sizeof(dp));
+			map<string,int> M;
+			int index = 0;
 			for (int i = 0;i<n;++i)
-				for (int j = 0;j<n;++j){
-					dp[i][j] = max(dp[i][j],dp[i][k]*dp[k][j]);
-				}
-		double maxresult= 0;
-		for (int i = 0;i<n;++i)
-			if (dp[i][i] > maxresult)
-				maxresult = dp[i][i];
+			{
+				string cur;
+				cin >> cur;
+				M[cur] = index++;
+			}	 
 
-		cout <<"Case "<<t++<<": ";
-		if (maxresult > 1.0)
-			cout <<"Yes"<<endl;
-		else
-			cout <<"No"<<endl;
+			int m;
+			cin >>m;
+			for (int i = 0;i<m;++i)
+			{
+				string x,y;
+				double dis;
+				cin >>x>>dis>>y;
+				dp[M[x]][M[y]] = dis;
+			}
+			for (int k = 0;k<n;++k)
+				for (int i = 0;i<n;++i)
+					for (int j = 0;j<n;++j){
+						dp[i][j] = max(dp[i][j],dp[i][k]*dp[k][j]);
+					}
+			double maxresult= 0;
+			for (int i = 0;i<n;++i)
+				if (dp[i][i] > maxresult)
+					maxresult = dp[i][i];
+
+			cout <<"Case "<<t++<<": ";
+			if (maxresult > 1.0)
+				cout <<"Yes"<<endl;
+			else
+				cout <<"No"<<endl;
+		}
+
+	return 0;
 	}
-
-return 0;
-}
