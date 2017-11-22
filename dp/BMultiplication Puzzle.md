@@ -9,9 +9,11 @@ For example, if cards in the row contain numbers 10 1 50 20 5, player might take
 
 If he would take the cards in the opposite order, i.e. 50, then 20, then 1, the score would be
 1*50*20 + 1*20*5 + 10*1*5 = 1000+100+50 = 1150.
+
 #  ‰»Î
 The first line of the input contains the number of cards N (3 <= N <= 100). The second line contains N integers in the range from 1 to 100, separated by spaces.
-# ‰≥ˆ
+
+#  ‰≥ˆ
 Output must contain a single integer - the minimal score.
 
 	#include<iostream>

@@ -3,21 +3,21 @@ As more and more computers are equipped with dual core CPU, SetagLilb, the Chief
 
 The routine consists of N modules, and each of them should run in a certain core. The costs for all the routines to execute on two cores has been estimated. Let's define them as Ai and Bi. Meanwhile, M pairs of modules need to do some data-exchange. If they are running on the same core, then the cost of this action can be ignored. Otherwise, some extra cost are needed. You should arrange wisely to minimize the total cost.
 
-#输入
+# 输入
 There are two integers in the first line of input data, N and M (1 ≤ N ≤ 20000, 1 ≤ M ≤ 200000) .
 The next N lines, each contains two integer, Ai and Bi.
 In the following M lines, each contains three integers: a, b, w. The meaning is that if module a and module b don't execute on the same core, you should pay extra w dollars for the data-exchange between them.
 
-#输出
+# 输出
 Output only one integer, the minimum total cost.
 
-#样例输入
+# 样例输入
 3 1
 1 10
 2 10
 10 3
 2 3 1000
-#样例输出
+# 样例输出
 13
 
 
