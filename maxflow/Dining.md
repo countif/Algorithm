@@ -13,13 +13,13 @@ Lines 2..N+1: Each line i starts with a two integers Fi and Di, the number of di
 # 输出
 Line 1: A single integer that is the maximum number of cows that can be fed both food and drink that conform to their wishes
 # 样例输入
-4 3 3
-2 2 1 2 3 1
-2 2 2 3 1 2
-2 2 1 3 1 2
-2 1 1 3 3
+>4 3 3
+>2 2 1 2 3 1
+>2 2 2 3 1 2
+>2 2 1 3 1 2
+>2 1 1 3 3
 # 样例输出
-3
+>3
 
 
 	#include<iostream>
