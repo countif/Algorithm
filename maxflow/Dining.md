@@ -21,136 +21,135 @@ Line 1: A single integer that is the maximum number of cows that can be fed both
 ÑùÀýÊä³ö
 3
 
-¡¤<center>
-#include<iostream>
-#include<stdio.h>
-#include<memory.h>
-#include<vector>
-#include<queue>
-#define INF 0x3f3f3f3f
-#define Max 10005
-using namespace std;
-int CurMax = 0;
-struct edge{
-	int to;
-	int value;
-	int recv;
-};
-vector<edge> Graph[Max];
-int level[Max];
 
-bool bfs(){
-	memset(level,0,sizeof(level));
-	level[0] = 1;
-	queue<int> Q;
-	Q.push(0);
-	while(!Q.empty()){
-		int t =	Q.front();
-		Q.pop();
-		for (int i = 0;i<Graph[t].size();++i){
-			edge e = Graph[t][i];
-			if (!level[e.to] &&e.value > 0){
-				level[e.to] = level[t] + 1;
-				Q.push(e.to);
+	#include<iostream>
+	#include<stdio.h>
+	#include<memory.h>
+	#include<vector>
+	#include<queue>
+	#define INF 0x3f3f3f3f
+	#define Max 10005
+	using namespace std;
+	int CurMax = 0;
+	struct edge{
+		int to;
+		int value;
+		int recv;
+	};
+	vector<edge> Graph[Max];
+	int level[Max];
+
+	bool bfs(){
+		memset(level,0,sizeof(level));
+		level[0] = 1;
+		queue<int> Q;
+		Q.push(0);
+		while(!Q.empty()){
+			int t =	Q.front();
+			Q.pop();
+			for (int i = 0;i<Graph[t].size();++i){
+				edge e = Graph[t][i];
+				if (!level[e.to] &&e.value > 0){
+					level[e.to] = level[t] + 1;
+					Q.push(e.to);
+				}
 			}
 		}
+		if (level[CurMax])
+			return true;
+		else
+			return false;
 	}
-	if (level[CurMax])
-		return true;
-	else
-		return false;
-}
 
-int getflow(int s,int end ,int curflow){
-	if (s == end)
-		return curflow;
+	int getflow(int s,int end ,int curflow){
+		if (s == end)
+			return curflow;
 
-	int result = 0;
+		int result = 0;
 
-	for (int i =0;i<Graph[s].size()&&result<curflow;++i){
-		edge &e = Graph[s][i];
-		int minflow = min(e.value,curflow);
-		if (minflow != 0&& level[e.to] == level[s] + 1){
-			int flow = getflow(e.to,end,minflow);
-			if (flow !=0){
-				e.value -= flow;
-				Graph[e.to][e.recv].value += flow;
-				result += flow;
-				curflow -= flow;
+		for (int i =0;i<Graph[s].size()&&result<curflow;++i){
+			edge &e = Graph[s][i];
+			int minflow = min(e.value,curflow);
+			if (minflow != 0&& level[e.to] == level[s] + 1){
+				int flow = getflow(e.to,end,minflow);
+				if (flow !=0){
+					e.value -= flow;
+					Graph[e.to][e.recv].value += flow;
+					result += flow;
+					curflow -= flow;
+				}
+			
 			}
+
+		}
+		if (result ==0)
+			level[s] = -1;
+
+		return result;
+	}
+
+	int GetMaxFlow( ){
+		int result = 0;
+		while(bfs()){
+			int flow = getflow(0,CurMax,INF);
+				result = result +flow;
+		}
+		return result ;
+	}
+
+	void BuildGraph(int start,int end,int flag){
+		edge e ;
 		
-		}
+		e.to = end;e.value = 1;e.recv = Graph[end].size();
+		Graph[start].push_back(e);
 
-	}
-	if (result ==0)
-		level[s] = -1;
+		e.to = start;e.value = flag;e.recv = Graph[start].size()-1;
 
-	return result;
-}
-
-int GetMaxFlow( ){
-	int result = 0;
-	while(bfs()){
-		int flow = getflow(0,CurMax,INF);
-			result = result +flow;
-	}
-	return result ;
-}
-
-void BuildGraph(int start,int end,int flag){
-	edge e ;
-	
-	e.to = end;e.value = 1;e.recv = Graph[end].size();
-	Graph[start].push_back(e);
-
-	e.to = start;e.value = flag;e.recv = Graph[start].size()-1;
-
-	Graph[end].push_back(e);
-	return ;
-}
-
-int main(){
-
-	int n,f,d;
-	cin >> n >> f >>d;
-	CurMax = 2*n+d+f+1;
-
-	
-	//src to food 
-	for (int i = 1;i<=f;++i)
-		BuildGraph(0,i,0);
-
-
-
-	for (int i = 1;i<=n;++i){
-		int nf,nd;
-		cin >> nf>>nd;
-		// food to cows 
-		for (int j = 0;j<nf;++j)
-		{
-			int x;
-			cin >>x;
-			BuildGraph(x,i+f,0);
-		}
-
-		// drink to cows
-		for (int j = 0;j<nd;++j){
-			int x;
-			cin >>x;
-			BuildGraph(f+n+i,x+f+2*n,0);
-		}
-		// cows to cows
-		BuildGraph(f+i,n+f+i,0);
+		Graph[end].push_back(e);
+		return ;
 	}
 
-	//drink to dst 
-	for (int i = 1;i<=d;++i)
-		BuildGraph(f+2*n+i,CurMax,0);
+	int main(){
 
-	int Flow = GetMaxFlow();
-	cout <<Flow<<endl;
+		int n,f,d;
+		cin >> n >> f >>d;
+		CurMax = 2*n+d+f+1;
+
+		
+		//src to food 
+		for (int i = 1;i<=f;++i)
+			BuildGraph(0,i,0);
 
 
-	return 0;
-}
-</center>¡¤
+
+		for (int i = 1;i<=n;++i){
+			int nf,nd;
+			cin >> nf>>nd;
+			// food to cows 
+			for (int j = 0;j<nf;++j)
+			{
+				int x;
+				cin >>x;
+				BuildGraph(x,i+f,0);
+			}
+
+			// drink to cows
+			for (int j = 0;j<nd;++j){
+				int x;
+				cin >>x;
+				BuildGraph(f+n+i,x+f+2*n,0);
+			}
+			// cows to cows
+			BuildGraph(f+i,n+f+i,0);
+		}
+
+		//drink to dst 
+		for (int i = 1;i<=d;++i)
+			BuildGraph(f+2*n+i,CurMax,0);
+
+		int Flow = GetMaxFlow();
+		cout <<Flow<<endl;
+
+
+		return 0;
+	}
