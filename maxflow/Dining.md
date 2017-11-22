@@ -21,7 +21,7 @@ Line 1: A single integer that is the maximum number of cows that can be fed both
 ÑùÀıÊä³ö
 3
 
-¡¯
+¡¤
 #include<iostream>
 #include<stdio.h>
 #include<memory.h>
@@ -153,4 +153,4 @@ int main(){
 
 	return 0;
 }
-¡¯
+¡¤
